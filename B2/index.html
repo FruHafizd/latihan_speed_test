@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Follow The Path</title>
+    <style type="text/css">
+        .item {
+            offset-path: inset(-4%);
+            width: 40px;
+            height: 40px;
+            
+            justify-content: center;
+            align-items: center;
+            font-weight: 500;
+            font-family: system-ui;
+            animation: move 6s infinite linear;
+            animation-composition: accumulate;
+        }
+
+        .in-item{
+            width: 0px;
+            height: 0px;
+            border-right: 40px solid transparent;
+            border-top: 40px solid red;
+            border-left: 40px solid red;
+            border-bottom: 40px solid red;
+            border-top-left-radius: 40px;
+            border-top-right-radius: 40px;
+            border-bottom-left-radius: 40px;
+            border-bottom-right-radius: 40px;
+            animation: pacman 0.2s infinite step-end;
+        }
+
+        .item:nth-child(2){
+            offset-distance: 5%;
+        }
+
+        .item:nth-child(3){
+            offset-distance: 10%;
+        }
+
+        .item:nth-child(4){
+            offset-distance: 15%;
+        }
+
+        .item:nth-child(5){
+            offset-distance: 20%;
+        }
+
+        .relative{
+            position: relative;
+            margin: auto;
+            background: url(siger.png) no-repeat center center;
+            background-size: 250px;
+            height: 450px;
+            width: 450px;
+            margin-top: 140px;
+            border: dashed 4px #000;
+        }
+
+        @keyframes move {
+            0%{
+                offset-distance: 0%;
+            }
+            100% {
+                offset-distance: 100%;
+            }
+        }
+
+        @keyframes pacman {
+            0% {
+                border-right:40px solid transparent ;
+            }
+
+            50% {
+                border-right: 40px solid red;
+            }
+        }    
+    </style>
+</head>
+<body>
+    <div class="relative">
+        <div class="item"><div class="in-item"></div></div>
+        <div class="item"><div class="in-item"></div></div>
+        <div class="item"><div class="in-item"></div></div>
+        <div class="item"><div class="in-item"></div></div>
+        <div class="item"><div class="in-item"></div></div>
+    </div>
+</body>
+</html>
