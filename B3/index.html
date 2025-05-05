@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Masking</title>
+
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+
+        html {
+            height: 100%;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        main{
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 480px;
+            height: 480px;
+            padding: 20px;
+            background: #fff;
+            line-height: 140px;
+        }
+
+        .clip-text,.clip-text2{
+            font-family: Tahoma;
+            font-size: 150px;
+            font-weight: 900;
+            text-align: center;
+            color: transparent;
+            background-clip: text;
+            -webkit-background-clip: text;
+            background-image: url(duar.webp);
+            background-size: cover;
+            background-position: center;
+            position: absolute;
+            transition: 0.5s;
+            opacity: 1;
+        }
+
+        .clip-text2{
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <div class="clip-text" id="satu">
+            LKSN XXXII
+        </div>
+        <div class="clip-text" id="dua">
+            BANJARMASIN 2025
+        </div>
+    </main>
+
+    <script>
+        function updateText(el){
+            if(el == 1){
+                setTimeout(function(){
+                    document.getElementById("satu").style.opacity="0";
+                    document.getElementById("dua").style.opacity="1";
+                },3000);
+            }else{
+                setTimeout(function(){
+                    document.getElementById("satu").style.opacity="1";
+                    document.getElementById("dua").style.opacity="0";
+                    updateText(1);
+                },3000);
+            }
+        }
+
+        updateText(1);
+    </script>
+</body>
+</html>
