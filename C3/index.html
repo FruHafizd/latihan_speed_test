@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Live Data</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body, html {
+      height: 100%;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+    #percentage {
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div id="percentage">Live Data : 0%</div>
+  <canvas id="liveChart" width="500" height="300"></canvas>
+
+  <script>
+    const ctx = document.getElementById('liveChart').getContext('2d');
+    const labels = Array.from({ length: 20 }, (_, i) => i + 1);
+    const initialData = Array.from({ length: 20 }, () => Math.floor(Math.random() * 100));
+
+    const chart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: '',
+          data: initialData,
+          fill: true,
+          backgroundColor: 'rgba(0, 255, 0, 0.2)',
+          borderColor: 'rgba(0, 255, 0, 0.5)',
+          tension: 0.3,
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            min: 0,
+            max: 100,
+            ticks: {
+              callback: value => `${value}%`
+            }
+          }
+        },
+        plugins: {
+          legend: { display: false }
+        },
+        animation: false
+      }
+    });
+
+    function updateChart() {
+      const newValue = Math.floor(Math.random() * 100);
+      chart.data.datasets[0].data.shift();
+      chart.data.datasets[0].data.push(newValue);
+      chart.update();
+
+      document.getElementById("percentage").textContent = `Live Data : ${newValue}%`;
+    }
+
+    // 🔽 Jalankan sekali saat load
+    updateChart();
+
+    // 🔁 Jalankan tiap detik
+    setInterval(updateChart, 1000);
+  </script>
+</body>
+</html>
