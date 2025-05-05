@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XYZ Move (Js Canvas)</title>
+</head>
+<body>
+
+    <canvas id="canvas">
+
+    </canvas>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        canvas.width = 500;
+        canvas.height = 500;
+        canvas.style.border = '1px solid black';
+        const c = canvas.getContext('2d');
+
+        class Rect{
+            constructor(c,config){
+                this.ctx = c; //context canvas
+                this.x = config.x; //posisi awal x
+                this.y = config.y; //posisi awal y
+                this.width = config.w; //lebar
+                this.height = config.h; // tinggi
+                this.mx = 0; //variable gerak x
+                this.my = 0; // variable gerak y
+                this.direction = 1; // arah gerak (1= maju,-1=mundur)
+                this.moveX = config.moveX || false; //gerak horizontal?
+                this.moveY = config.moveY || false; //gerak vertikal?
+                this.moveBoth = config.moveBoth || false;
+                this.color = config.color || 'black'; //warna
+            }
+
+            updatePosition(){
+                this.mx += 1 * this.direction;
+                this.my += 1 * this.direction;
+
+                // jika menambrak tapi kanan/bawah, balik arah
+                if(this.x + 20 > canvas.width || this.y + 20 > canvas.height){
+                    this.direction = -1;
+                }
+
+                if(this.x < 0 || this.y < 0){
+                    this.direction = 1;
+                }
+
+                //update posisi berdasarkan tipe gerakan
+                if(this.moveBoth){
+                    this.x = this.mx;
+                    this.y = this.my;
+                }
+
+                if(this.moveX){
+                    this.x = this.mx;
+                }
+
+                if(this.moveY){
+                    this.y = this.my;
+                }
+            }
+
+            draw(){
+                this.ctx.fillStyle = this.color;
+                this.ctx.fillRect(this.x, this.y, this.width, this.height);
+            }
+        }
+
+        const rect1 = new Rect(c,{
+            x: 20, y: 20, w: 20, h: 20,
+            moveBoth: true, color: 'red'
+        });
+
+        const rect2 = new Rect(c,{
+            x: 250, y:20, w:20, h:20,
+            moveY: true, color: 'green' 
+        });
+
+        const rect3 = new Rect(c, {
+            x: 20, y: 250, w: 20, h: 20,
+            moveX: true, color: 'blue'
+        });
+
+        function animate() {
+            c.clearRect(0,0, canvas.width, canvas.height);
+            rect1.updatePosition();
+            rect1.draw();
+            rect2.updatePosition();
+            rect2.draw();
+            rect3.updatePosition();
+            rect3.draw();
+            requestAnimationFrame(animate);
+        }
+        animate();
+    </script>
+</body>
+</html>
