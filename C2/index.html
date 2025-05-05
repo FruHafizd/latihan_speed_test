@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rain Forest Canvas</title>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        canvas.width = 500;
+        canvas.height = 500;
+        canvas.style.border = '1px solid black';
+        const ctx = canvas.getContext('2d');
+        let lineCollections = [];
+
+        class Line {
+            constructor(ctx, config) {
+                this.ctx = ctx;
+                this.x = config.x; // Posisi horizontal tetap
+                this.y = config.y;  // Posisi vertikal awal
+                this.speed = config.speed || 2; // kecepatan jatuh
+                this.length = config.length || 50; // Panjang garis
+            }
+
+            draw() {
+                this.ctx.strokeRect(this.x, this.y, 1, this.length); // Garis vertikal
+            }
+
+            update() {
+                this.y += this.speed;  // Gerakkan garis ke bawah
+
+                if(this.y > canvas.height){
+                    this.y = -this.length;
+                    this.x = Math.random() * canvas.width;
+                }
+
+                this.draw();
+            }
+
+        }
+
+        function drawStaticText() {
+            ctx.font = '50px Arial';
+            ctx.strokeText('Rain Forest', canvas.width / 4, canvas.height / 2);
+        }
+
+        for(let i = 0; i < 100; i++ ){
+            let line = new Line(ctx, {
+                x: Math.random() * canvas.width,
+                y: Math.random() * -canvas.height, //Mulai Dari atas canvas
+                speed: 2 + Math.random() * 3, // Kecepatan acak
+                length: 30 + Math.random() * 50 // Panjang acak
+            });
+            lineCollections.push(line);
+        }
+
+        function animate() {
+            ctx.clearRect(0,0, canvas.width, canvas.height);
+            drawStaticText();
+            lineCollections.forEach((line) => {
+                line.update() 
+            });
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+
+    </script>
+</body>
+</html>
