@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flip Card</title>
+    <style type="text/css">
+        body{
+            transition: 0.8s;
+            margin-top: 150px;
+        }
+
+        .flip-card{
+            background-color: transparent;
+            width: 300px;
+            height: 300px;
+            perspective: 1000px;
+            margin: 30px auto;
+            font-family: Arial;
+        }
+
+        .flip-card-inner{
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+        }
+
+        .flip-card:hover .flip-card-inner{
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-front, .flip-card-back{
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+        }
+
+        .flip-card-front{
+            background-color: orangered;
+            border-radius: 30px;
+            color: black;
+            overflow: hidden;
+        }
+
+        .flip-card-back {
+            background-color: orange;
+            color: white;
+            transform: rotateY(180deg);
+            border-radius: 30px;
+            overflow: hidden;
+        }
+
+        .wave{
+            width: 600px;
+            height: 600px;
+            position: absolute;
+            top: -25%;
+            left: 50%;
+            margin-left: -300px;
+            margin-top: -350px;
+            border-radius: 35%;
+            background-color: orange;
+            animation: wave 15s infinite linear;
+        }
+
+        .flip-card-back .wave{
+            background: orangered;
+        }
+
+        @keyframes wave {
+            from {
+                transform: rotate(0deg);
+            }
+            from {
+                transform: rotate(360deg);
+            }
+        }
+        h1,h2 {
+            margin: 0;
+        }
+        a{
+            color: orangered;
+            border-radius: 50px;
+            padding: 10px 20px;
+            display: inline-block;
+            background-color: #fff;
+            border: solid 1px orangered;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+    </style>
+</head>
+<body>
+    <div class="flip-card" id="card">
+        <div class="flip-card-inner">
+            <div class="flip-card-front">
+                <img src="maskot.png" alt="Avatar" style="position:relative; z-index: 9999;">
+                <div class="wave"></div>
+            </div>
+            <div class="flip-card-back">
+                <div style="position:relative; z-index:99; padding-top:70px;">
+                    <h1>Si Gala</h1>
+                    <h1>Maskot LKS SMK XXXII Tahun 2025</h1>
+                    <a href="">Detail</a>
+                </div>
+                <div class="wave"></div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        document.getElementById('card').addEventListener('mouseover', function() {
+            document.getElementsByTagName('body')[0].setAttribute('style','background:black');
+        });
+
+        document.getElementById('card').addEventListener('mouseout', function(){
+           document.getElementsByTagName('body')[0].setAttribute('style',''); 
+        });
+    </script>
+</body>
+</html>
