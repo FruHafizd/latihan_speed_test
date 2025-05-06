@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: sans-serif;
+          }
+          
+          body {
+            background: #f4f4f4;
+          }
+          
+          .container {
+            display: flex;
+            min-height: 100vh;
+          }
+          
+          .sidebar {
+            background: #4b4f65;
+            color: white;
+            padding: 20px;
+            width: 220px;
+          }
+          
+          .sidebar h2 {
+            margin-bottom: 20px;
+          }
+          
+          .sidebar ul li {
+            margin: 15px 0;
+            cursor: pointer;
+          }
+          
+          .main {
+            flex: 1;
+            padding: 20px;
+          }
+          
+          .navbar {
+            background: #6d718b;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+          }
+          
+          .statistics {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+          }
+          
+          .card {
+            flex: 1;
+            padding: 20px;
+            border-radius: 10px;
+            color: white;
+            font-size: 1.2em;
+            text-align: center;
+          }
+          
+          .card h3 {
+            margin-bottom: 10px;
+          }
+          
+          .blue {
+            background: #4754c6;
+          }
+          .green {
+            background: #54b56e;
+          }
+          .yellow {
+            background: #e2d95f;
+            color: #000;
+          }
+          .aqua {
+            background: #68d1df;
+          }
+          
+          .chart {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+          }
+          
+          .bar-chart {
+            display: flex;
+            gap: 10px;
+            align-items: flex-end;
+            height: 200px;
+            margin-top: 20px;
+          }
+          
+          .bar {
+            width: 40px;
+            background: #4754c6;
+            border-radius: 5px;
+          }
+          
+    </style>
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <h2>Dashboard</h2>
+      <ul>
+        <li>🏠 Home</li>
+        <li>🔍 Search</li>
+      </ul>
+    </aside>
+
+    <main class="main">
+      <header class="navbar">
+        <h1>Dashboard Admin</h1>
+      </header>
+
+      <section class="statistics">
+        <div class="card blue">
+          <h3>Total User</h3>
+          <p>320 👤</p>
+        </div>
+        <div class="card green">
+          <h3>Total Sales</h3>
+          <p>3413 💵</p>
+        </div>
+        <div class="card yellow">
+          <h3>Total Revenue</h3>
+          <p>$53,465.561 💰</p>
+        </div>
+        <div class="card aqua">
+          <h3>Total Bookings</h3>
+          <p>65961 👥</p>
+        </div>
+      </section>
+
+      <section class="chart">
+        <h2>Chart (Example)</h2>
+        <div class="bar-chart">
+          <div class="bar" style="height: 60%"></div>
+          <div class="bar" style="height: 80%"></div>
+          <div class="bar" style="height: 40%"></div>
+          <div class="bar" style="height: 70%"></div>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
